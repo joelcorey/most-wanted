@@ -21,19 +21,29 @@ function searchByFullName(people) {
 	userSearchChoice.trim();
 	let userSearchSplit = userSearchChoice.split(" ");
 
-	if (userSearchSplit.length > 1) {
+	if (userSearchSplit.length > 2) {
 		alert("Error, please put in first and last name only");
 		app(people);
 	} else {
-
 		for(let i = 0; i < people.length; i++) {
-			if(people[i].firstName === userSearchChoice) {
-				console.log(userSearchChoice);
-			}else{
-			
+			//if(userSearchSplit[0] === people[i].firstName && userSearchSplit[1] === people[i].lastName) {
+			//if(userSearchSplit[0].includes(people[i].firstName) && userSearchSplit[1].includes(people[i].lastName)) {
+			let search1 = lowerCase(userSearchSplit[0]);
+			let search2 = lowerCase(userSearchSplit[1]);
+			//console.log(search1 + " " + search2);
+			if(search1.includes(lowerCase(people[i].firstName)) && search2.includes(lowerCase(people[i].lastName))) {
+				echoThis(people[i].firstName + " " + people[i].lastName);
 			}
 		}
 	}
+}
+
+function echoThis(toEcho) {
+	console.log(toEcho);
+}
+
+function lowerCase(word) {
+	return word.toLowerCase();
 }
 
 function searchByTraits(people) {
