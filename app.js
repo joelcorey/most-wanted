@@ -1,13 +1,10 @@
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
-
-// app is the function called to start the entire application
 function app(people){
 	var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
 	switch(searchType){
 		case 'yes':
 		// TODO: search by name
+		searchByFullName(people);
+
 		break;
 		case 'no':
 		searchByTraits(people);
@@ -16,6 +13,26 @@ function app(people){
 		alert("Wrong! Please try again, following the instructions dummy. :)");
 		app(people); // restart app
 		break;
+	}
+}
+
+function searchByFullName(people) {
+	let userSearchChoice = prompt("Please enter in first and last name");
+	userSearchChoice.trim();
+	let userSearchSplit = userSearchChoice.split(" ");
+
+	if (userSearchSplit.length > 1) {
+		alert("Error, please put in first and last name only");
+		app(people);
+	} else {
+
+		for(let i = 0; i < people.length; i++) {
+			if(people[i].firstName === userSearchChoice) {
+				console.log(userSearchChoice);
+			}else{
+			
+			}
+		}
 	}
 }
 
@@ -37,9 +54,9 @@ function searchByTraits(people) {
 		break;
 	}  
 
-  let foundPerson = filteredPeople[0];
+	let foundPerson = filteredPeople[0];
 
-  mainMenu(foundPerson, people);
+	mainMenu(foundPerson, people);
 
 }
 
