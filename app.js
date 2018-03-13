@@ -25,19 +25,33 @@ function searchByFullName(people) {
 		for(let i = 0; i < people.length; i++) {
 			if(matchTrait(userSearchSplit[0], people[i].firstName) && matchTrait(userSearchSplit[1], people[i].lastName)) {
 				//echo(people[i].firstName + " " + people[i].lastName);
-				displayTraits(people[i]);
+				displayTraits(people, [i]);
 			}
 		}
 	}
 }
 
-function displayTraits(person) {
-	for(let trait of Object.values(person)) {
-		//console.log(trait);
-		if(Object.hasOwnProperty(trait)) {
-			console.log(trait);
-		}
-	}
+function displayTraits(people, i) {
+	//TODO: itterate over object properties to clean this function up
+	// for(let trait of Object.values(person)) {
+	// console.log(trait);
+	// }
+
+	let message = "";
+	let newLine = "\r\n";
+
+	message += "ID: " + people[i].id + newLine
+	message += "Name: " + people[i].firstName + " " + people[i].lastName + newLine;
+	message += "Gender: " + people[i].gender + newLine;
+	message += "DOB: " + people[i].dob + newLine;
+	message += "Height: " + people[i].height + newLine;
+	message += "Weight: " + people[i].weight + newLine;
+	message += "Eye color: " + people[i].eyeColor + newLine;
+	message += "Occupation: " + people[i].occupation + newLine;
+	message += "Parents: " + people[i].parents + newLine;
+	message += "Spouse: " + people[i].currentSpouse;
+
+	alert(message);
 }
 
 function restart(displayThisError) {
