@@ -4,9 +4,7 @@ function app(people){
 	var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
 	switch(searchType){
 		case 'yes':
-		// TODO: search by name
 		searchByFullName(people);
-
 		break;
 		case 'no':
 		searchByTraits(people);
@@ -21,17 +19,25 @@ function app(people){
 function searchByFullName(people) {
 	let userSearchChoice = prompt("Please enter in first and last name");
 	let userSearchSplit = makeArray(userSearchChoice);
-
 	if (userSearchSplit.length > 2) {
-		alert("Error, please put in first and last name only");
-		app(people);
+		restart("Error, please put in first and last name only");
 	} else {
 		for(let i = 0; i < people.length; i++) {
 			if(matchTrait(userSearchSplit[0], people[i].firstName) && matchTrait(userSearchSplit[1], people[i].lastName)) {
-				echo(people[i].firstName + " " + people[i].lastName);
+				//echo(people[i].firstName + " " + people[i].lastName);
+				displayTraits(people[i]);
 			}
 		}
 	}
+}
+
+function displayTraits(people) {
+
+}
+
+function restart(displayThisError) {
+	alert(displayThisError);
+	app(people);
 }
 
 function makeArray(inputString) {
@@ -40,8 +46,6 @@ function makeArray(inputString) {
 }
 
 function matchTrait(word, trait) {
-	
-
 	if(word.includes(lowerCase(trait))) {
 		return true;
 	}else{
