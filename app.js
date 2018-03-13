@@ -53,15 +53,6 @@ function displayTraits(person) {
 	alert(message);
 }
 
-function getDescendants(people) {
-	for (let i = 0; i < people.length; i++) {
-		if(people[i].isArray) {
-			console.log(people[i]);
-		}
-		
-	}
-}
-
 function isEmpty(obj) {
     for(var key in obj) {
         if(obj.hasOwnProperty(key))
@@ -133,6 +124,28 @@ function searchByWeight(people) {
 	return newArray;
 }
 
+function buildDescendants(people, array, count, maxcount) {
+	// construct new array of objects
+	// use parent id as first property
+	// add each descendent to an array property
+	// do this using recursion
+	// then be able to search against this using id's
+
+	if(count >= maxcount) {
+		return array;
+	}	
+	// console.log("Count: " + count);
+	// console.log("maxCount: " + maxcount);
+
+
+	if(people[count].parents.length > 0) {
+		console.log(people[count].parents);
+	}
+	
+	count++;
+	buildDescendants(people, array, count, maxcount);
+}
+
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -147,24 +160,24 @@ function mainMenu(person, people){
 
 	switch(displayOption){
 		case "info":
-		// TODO: get person's info
-
-		displayTraits(people[person]);
-
-		break;
+			displayTraits(people[person]);
+			break;
 		case "family":
-		// TODO: get person's family
-		break;
+			// TODO: get person's family
+			break;
 		case "descendants":
-		// TODO: get person's descendants
-		break;
+			let descendants = [];
+			descendants = buildDescendants(people, descendants, 0, people.length);
+			//console.log(descendants);
+			//getDescendants(person, people);
+			break;
 		case "restart":
-		app(people); // restart
-		break;
+			app(people);
+			break;
 		case "quit":
-		return; // stop execution
+			return
 		default:
-		return mainMenu(person, people); // ask again
+			return mainMenu(person, people); // ask again
 	}
 }
 
