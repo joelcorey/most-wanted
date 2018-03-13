@@ -2,17 +2,28 @@
 
 function app(people){
 
-	var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+	let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+	
+	// if(searchType == "y" || searchType == "yes") {
+	// 	searchByFullName(people);
+	// }
+	// else if (searchType == "n" || searchType == "no") {
+	// 	searchByFullName(people);
+	// } else {
+	// 	alert("Wrong! Please try again, following the instructions dummy. :)");
+	// 	app(people);
+	// }
 	switch(searchType){
-		case 'yes' || 'y':
-		searchByFullName(people);
-		break;
-		case 'no' || 'n':
-		searchByTraits(people);
-		break;
+		case 'yes':
+		
+			searchByFullName(people);
+			break;
+		case 'no': 
+			searchByTraits(people);
+			break;
 		default:
-		alert("Wrong! Please try again, following the instructions dummy. :)");
-		app(people);
+			alert("Wrong! Please try again, following the instructions dummy. :)");
+			app(people);
 		break;
 	}
 }
@@ -25,8 +36,6 @@ function searchByFullName(people) {
 	} else {
 		for(let i = 0; i < people.length; i++) {
 			if(matchTrait(userSearchSplit[0], people[i].firstName) && matchTrait(userSearchSplit[1], people[i].lastName)) {
-				//echo(people[i].firstName + " " + people[i].lastName);
-				//displayTraits(people[i]);
 				mainMenu(i, people);
 			}
 		}
@@ -134,7 +143,7 @@ function mainMenu(person, people){
 		return app(people); // restart
 	}
 
-	var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+	var displayOption = prompt("Found " + people[person].firstName + " " + people[person].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
 	switch(displayOption){
 		case "info":
