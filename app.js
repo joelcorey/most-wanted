@@ -1,3 +1,5 @@
+"use strict";
+
 function app(people){
 	var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
 	switch(searchType){
@@ -11,34 +13,43 @@ function app(people){
 		break;
 		default:
 		alert("Wrong! Please try again, following the instructions dummy. :)");
-		app(people); // restart app
+		app(people);
 		break;
 	}
 }
 
 function searchByFullName(people) {
 	let userSearchChoice = prompt("Please enter in first and last name");
-	userSearchChoice.trim();
-	let userSearchSplit = userSearchChoice.split(" ");
+	let userSearchSplit = makeArray(userSearchChoice);
 
 	if (userSearchSplit.length > 2) {
 		alert("Error, please put in first and last name only");
 		app(people);
 	} else {
 		for(let i = 0; i < people.length; i++) {
-			//if(userSearchSplit[0] === people[i].firstName && userSearchSplit[1] === people[i].lastName) {
-			//if(userSearchSplit[0].includes(people[i].firstName) && userSearchSplit[1].includes(people[i].lastName)) {
-			let search1 = lowerCase(userSearchSplit[0]);
-			let search2 = lowerCase(userSearchSplit[1]);
-			//console.log(search1 + " " + search2);
-			if(search1.includes(lowerCase(people[i].firstName)) && search2.includes(lowerCase(people[i].lastName))) {
-				echoThis(people[i].firstName + " " + people[i].lastName);
+			if(matchTrait(userSearchSplit[0], people[i].firstName) && matchTrait(userSearchSplit[1], people[i].lastName)) {
+				echo(people[i].firstName + " " + people[i].lastName);
 			}
 		}
 	}
 }
 
-function echoThis(toEcho) {
+function makeArray(inputString) {
+	inputString.trim();
+	return inputString.split(" ");
+}
+
+function matchTrait(word, trait) {
+	
+
+	if(word.includes(lowerCase(trait))) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function echo(toEcho) {
 	console.log(toEcho);
 }
 
