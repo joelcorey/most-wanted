@@ -31,8 +31,13 @@ function searchByFullName(people) {
 	}
 }
 
-function displayTraits(people) {
-
+function displayTraits(person) {
+	for(let trait of Object.values(person)) {
+		//console.log(trait);
+		if(Object.hasOwnProperty(trait)) {
+			console.log(trait);
+		}
+	}
 }
 
 function restart(displayThisError) {
