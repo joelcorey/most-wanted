@@ -44,7 +44,12 @@ function displayTraits(person) {
 }
 
 function getDescendants(people) {
-	array_walk_recursive(people)
+	for (let i = 0; i < people.length; i++) {
+		if(people[i].isArray) {
+			console.log(people[i]);
+		}
+		
+	}
 }
 
 function isEmpty(obj) {
@@ -66,7 +71,7 @@ function makeArray(inputString) {
 }
 
 function matchTrait(word, trait) {
-	if(word.includes(lowerCase(trait))) {
+	if(lowerCase(word).includes(lowerCase(trait))) {
 		return true;
 	}else{
 		return false;
