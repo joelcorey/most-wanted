@@ -1,12 +1,13 @@
 "use strict";
 
 function app(people){
+
 	var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
 	switch(searchType){
-		case 'yes':
+		case 'yes' || 'y':
 		searchByFullName(people);
 		break;
-		case 'no':
+		case 'no' || 'n':
 		searchByTraits(people);
 		break;
 		default:
@@ -28,30 +29,30 @@ function searchByFullName(people) {
 				displayTraits(people[i]);
 			}
 		}
-	}
+	}	
 }
 
 function displayTraits(person) {
-	//TODO: itterate over object properties to clean this function up
-	// for(let trait of Object.values(person)) {
-	// console.log(trait);
-	// }
-
-	let message = "";
-	let newLine = "\r\n";
-
-	message += "ID: " + person.id + newLine
-	message += "Name: " + person.firstName + " " + person.lastName + newLine;
-	message += "Gender: " + person.gender + newLine;
-	message += "DOB: " + person.dob + newLine;
-	message += "Height: " + person.height + newLine;
-	message += "Weight: " + person.weight + newLine;
-	message += "Eye color: " + person.eyeColor + newLine;
-	message += "Occupation: " + person.occupation + newLine;
-	message += "Parents: " + person.parents + newLine;
-	message += "Spouse: " + person.currentSpouse;
-
+	let message = ""; 
+	for (var key in person) {
+		if (person.hasOwnProperty(key)) {
+		  //console.log(key + " -> " + person[key]);
+		  message += key + ": " + person[key] + "\r\n";
+		}
+	}
 	alert(message);
+}
+
+function getDescendants(people) {
+	array_walk_recursive(people)
+}
+
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
 }
 
 function restart(displayThisError) {
