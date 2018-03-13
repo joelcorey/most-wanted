@@ -26,7 +26,8 @@ function searchByFullName(people) {
 		for(let i = 0; i < people.length; i++) {
 			if(matchTrait(userSearchSplit[0], people[i].firstName) && matchTrait(userSearchSplit[1], people[i].lastName)) {
 				//echo(people[i].firstName + " " + people[i].lastName);
-				displayTraits(people[i]);
+				//displayTraits(people[i]);
+				mainMenu(i, people);
 			}
 		}
 	}	
@@ -128,7 +129,7 @@ function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-	if(!person){
+	if(!people[person]){
 		alert("Could not find that individual.");
 		return app(people); // restart
 	}
@@ -138,6 +139,9 @@ function mainMenu(person, people){
 	switch(displayOption){
 		case "info":
 		// TODO: get person's info
+
+		displayTraits(people[person]);
+
 		break;
 		case "family":
 		// TODO: get person's family
