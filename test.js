@@ -1,3 +1,5 @@
+//This file used for testing with node. To be deleted.
+
 const data = [
 	{
 		"id": 272822514,
@@ -286,3 +288,47 @@ const data = [
 		"currentSpouse": null
 	}
 ];
+
+const data2 = [];
+
+function buildDescendants(personID, people) {
+	let descendants = [];
+	// let addDescendants = [];
+
+	if(people.length <= 0) {
+		console.log("Empty");
+		return descendants;
+	} else {
+		descendants = people.filter(function (el) {
+			for(let i = 0; i < el.parents.length; i++){
+				if(el.parents[i] === personID) {
+					return true;
+				}
+			}
+		});
+		for (let i = 0; i < descendants.length; i++){
+			descendants = descendants.concat(buildDescendants(descendants[i].id, people));
+		}
+		// call each descants through buildDescendants?
+	}
+	
+	return descendants;
+}
+
+// "id": 693243224,
+// "firstName": "Joy",
+// "lastName": "Madden",
+// "gender": "female",
+// "dob": "4/20/1939",
+// "height": 69,
+// "weight": 199,
+// "eyeColor": "hazel",
+// "occupation": "doctor",
+// "parents": [],
+// "currentSpouse": null
+
+let person = 693243224;
+
+let descendants = buildDescendants(person, data);
+
+console.log(descendants);
